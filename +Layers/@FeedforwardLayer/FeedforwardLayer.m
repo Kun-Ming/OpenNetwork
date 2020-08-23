@@ -1,0 +1,3 @@
+classdef FeedforwardLayer < BaseLayer
+    
+end
