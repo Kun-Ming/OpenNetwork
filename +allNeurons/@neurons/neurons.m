@@ -1,17 +1,9 @@
 classdef neurons < handle
     properties
-        v_th
-        v
-        v_re
-        neuron_type    %excitory or inhibitory
+        v_th = -10
+        v_leaky = -60
+        v = (v_th - v_leaky)*rand + v_leaky     % generate a random # between v_leaky and b_th
+        v_ref = -65
     end
     
-    methods
-        function obj = neurons(v_th, v, v_re, neuron_type)
-            obj.v_th = v_th;
-            obj.v = v;
-            obj.v_re = v_re;
-            obj.neuron_type = neuron_type;
-        end
-    end
 end
