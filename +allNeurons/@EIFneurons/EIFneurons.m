@@ -13,16 +13,6 @@ classdef EIFneurons < neurons
         function obj = EIFneurons(type)
             obj.type = type;
         end
-        
-        function spike_time = EIF_Integrate(I_input)    %I_input: time * # of neuron
-            t = len(I_input);   % total time
-            spike_time = zeros(t);
-            
-            
-        end
-    end
-    
-    methods (Access = private)
         [v] = limit_neuron_v(obj);
     end
 end
