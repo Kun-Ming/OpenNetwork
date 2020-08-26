@@ -13,6 +13,6 @@ classdef EIFneurons < neurons
         function obj = EIFneurons(type)
             obj.type = type;
         end
-        [v] = limit_neuron_v(obj);
+        [v] = limit_neuron_v(obj, v_calcuted);
     end
 end

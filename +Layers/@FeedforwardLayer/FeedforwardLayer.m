@@ -3,13 +3,13 @@ classdef FeedforwardLayer < BaseLayer
         N_exc_neuron
         N_inh_neuron
         syn_type    % probability of each syn type
-        neuron_layer    % neuron's distribution in this layer
+        neuron_layer    % neuron's distribution in this layer, a 1d/2d/3d matrix of neuron object.
     end
     
     methods
-        function obj = FeedforwardLayer(total_neurons, dim, N_neurons_in_dim, N_exc_neuron, N_inh_neuron, syn_type)
+        function obj = FeedforwardLayer(N_neurons_in_dim, N_exc_neuron, N_inh_neuron, syn_type)
             
-            obj = obj@BaseLayer(total_neurons, dim, N_neurons_in_dim);
+            obj = obj@BaseLayer(N_neurons_in_dim);
             
             obj.N_exc_neuron = N_exc_neuron;
             obj.N_inh_neuron = N_inh_neuron;
