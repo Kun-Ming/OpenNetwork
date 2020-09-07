@@ -37,6 +37,6 @@ classdef FeedforwardLayer < Layers.BaseLayer
         end
         
         [all_syn_layer] = generate_synapse(obj, conn_strength, type, speed);
-        simulation(obj, ffInput);   %feedforward input
+        simulation(obj, time_now);   
     end
 end

@@ -6,7 +6,7 @@ classdef EIFneurons < allNeurons.neurons
         v_t = -50
         v_lb = -100
         dt = .01
-        ref_time   % refactory time remain
+        ref_time = 1.5   % refactory time remain
         spike_train
     end
     

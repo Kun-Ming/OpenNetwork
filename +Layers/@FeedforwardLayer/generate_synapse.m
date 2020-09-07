@@ -51,27 +51,10 @@ function [postsyn_IDs] = get_projection_field(presyn_ID, k, layer_size)
     layer( presyn_pos.x - floor(lx/2) : presyn_pos.x + floor(lx/2), ...
         presyn_pos.y - floor(ly/2) : presyn_pos.y + floor(ly/2)) = sublayer.*mask; 
     
-    % resizing, delete zero padding
+    % resizing, delete padding
     layer = layer(ceil(lx/2) : size(layer, 1) - floor(lx/2),...
         ceil(ly/2) : size(layer, 2) - floor(ly/2));
     postsyn_IDs = find(layer);
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
