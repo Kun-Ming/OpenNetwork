@@ -1,11 +1,11 @@
-function simulation(obj, input, curr_t, dt, delta_t, v_t)
+function simulation(obj, input, time_now)
     
     if ~obj.state
-        obj.v = obj.v + (dt / obj.tau_m) * ( (obj.v_leaky - obj.v) + ...
-        delta_t * exp((obj.v - v_t)/delta_t) + input );
+        obj.v = obj.v + (obj.dt / obj.tau_m) * ( (obj.v_leaky - obj.v) + ...
+        obj.delta_t * exp((obj.v - obj.v_t)/obj.delta_t) + input );
     
         if obj.v > obj.v_th
-            obj.spike_train(curr_t) = true;
+            obj.spike_train(time_now) = true;
             obj.state = true;
         end
     end

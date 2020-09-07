@@ -2,9 +2,10 @@ classdef EIFneurons < allNeurons.neurons
     properties
         ID
         tau_m = 15
-        Delta_T = 2
-        vT = -50
+        delta_t = 2
+        v_t = -50
         v_lb = -100
+        dt = .01
         ref_time   % refactory time remain
         spike_train
     end
