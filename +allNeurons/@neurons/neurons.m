@@ -4,6 +4,8 @@ classdef neurons < handle
         v_leaky = -60
         v 
         v_ref = -65
+        
+        ei_type
     end
     
     methods

@@ -1,26 +1,31 @@
 function simulation(obj, time_now, keOutDegree, kiOutDegree)
-    
-    spike_time = find(obj.presyn_neuron.spike_train); % spike train of pre synpatic neuron
+% base_synapse simulation
+    if nargin > 1
+        spike_time = find(obj.presyn_neuron.spike_train); % spike train of pre synpatic neuron
+        if max(size(spike_time)) > time_now
+            spike_time = spike_time(1 : time_now);
+        end
 
-    presyn_I = @() (1 / (obj.taud - obj.taur)...
-                * ( exp((time_now - spike_time) / taud) - ...
-                exp((time_now - spike_time) / taur) ) );    
-    
-    switch obj.ei_type
-        case 'exc'
-            
-            recurrent_I = ( obj.conn_strength / sqrt(keOutDegree) )...
-                * sum(presyn_I());
+        presyn_I = @() (1 / (obj.taud - obj.taur)...
+                    * ( exp((time_now - spike_time) / obj.taud) - ...
+                    exp((time_now - spike_time) / obj.taur) ) );    
 
-            %simulation in single neuron
-            obj.postsyn_neuron.simulation(recurrent_I, time_now);
+        switch obj.pre_ei_type
+            case 'exc'
 
-        case 'inh'
-            
-            recurrent_I = ( obj.conn_strength / sqrt(kiOutDegree) )...
-                * sum(presyn_I());
+                recurrent_I = ( obj.conn_strength / sqrt(keOutDegree) )...
+                    * sum(presyn_I());
 
-            %simulation in single neuron
-            obj.postsyn_neuron.simulation(-recurrent_I, time_now);
+            case 'inh'
+
+                recurrent_I = ( obj.conn_strength / sqrt(kiOutDegree) )...
+                    * sum(presyn_I());
+
+        end
+
+        %simulation in single neuron
+                obj.postsyn_neuron.simulation(recurrent_I, time_now);
+    else
+        disp('synapse simulation');
     end
 end

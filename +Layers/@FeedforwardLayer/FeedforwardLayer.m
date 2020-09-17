@@ -3,7 +3,7 @@ classdef FeedforwardLayer < Layers.BaseLayer
         %parameter
         N_exc_neuron
         N_inh_neuron
-        syn_type    % precentage of each syn type
+        syn_type    % precentage of fast or slow
         simulationTime
         ke
         ki
@@ -34,9 +34,14 @@ classdef FeedforwardLayer < Layers.BaseLayer
             a = (1 : 1 : obj.total_neurons);
             neuronID = mat2cell(a(:), ones(1, obj.total_neurons));
             [obj.neuron_in_layer.ID] = neuronID{:};
+            
+            % determin exc or inh
+            [obj.neuron_in_layer(:).ei_type] = deal(rand);
+            
+            obj.syn_in_layer = cell(obj.total_neurons, 1);
         end
         
-        [all_syn_layer] = generate_synapse(obj, conn_strength, type, speed);
+        generate_synapse(obj, conn_strength, type, speed);
         simulation(obj, time_now);   
     end
 end

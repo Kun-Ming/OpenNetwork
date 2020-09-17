@@ -6,17 +6,21 @@ classdef base_synapse < handle
         taud    % tau decay
         taur    % tau rise
         conn_strength  % connection strengh
-        ei_type
+        pre_ei_type
     end
     
     methods
-        function obj = base_synapse(neuron, taud, taur, conn_strength, type)
-            obj.postsyn_neuron = neuron;
-            obj.taud = taud;
-            obj.taur = taur;
-            obj.conn_strength = conn_strength;
-            obj.ei_type = type;
+        function obj = base_synapse(post_neuron, pre_neuron, taud, taur, conn_strength, type)
+            if nargin > 1
+                obj.postsyn_neuron = post_neuron;
+                obj.presyn_neuron = pre_neuron;
+                obj.taud = taud;
+                obj.taur = taur;
+                obj.conn_strength = conn_strength;
+                obj.pre_ei_type = type;
+            end
         end
-        simulation(obj);
+        
+        syn_simulation(obj);
     end
 end
