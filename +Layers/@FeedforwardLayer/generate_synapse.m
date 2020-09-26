@@ -25,12 +25,17 @@ function  generate_synapse(obj, syn_param)
 %     kiOutDegree = sum(1 : 1 : obj.ki-2) * 4 + (obj.ki - 1) * 4;
     
     for i = 1 : obj.total_neurons   % generate synapse from ith neuron to other neurons
-        
+        fprintf("feedforwardLayer generating synapse: presyn neuron ID = %d\n", i);
         if obj.neuron_in_layer(i).ei_type < obj.N_exc_neuron / obj.total_neurons    % presynaptic neuron: exc neuron
             postsyn_IDs = get_projection_field(i, obj.ke, size(obj.neuron_in_layer));
             post_syn_arr = cell(max(size(postsyn_IDs)), 1);
             
             for j = 1 : max(size(postsyn_IDs))
+                
+                if i == postsyn_IDs(j)
+                    continue
+                end
+                
                 postsyn_neuron = findobj(obj.neuron_in_layer, 'ID', postsyn_IDs(j));
                 
                 judgement = rand;

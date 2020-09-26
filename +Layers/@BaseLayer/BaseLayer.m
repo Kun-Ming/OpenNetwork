@@ -19,6 +19,6 @@ classdef BaseLayer < handle
     end
     
     methods(Abstract)
-        [all_syn_layer] = generate_synapse(conn_strength, type, speed);     %super parameter
+        generate_synapse(obj, syn_param);     
     end
 end

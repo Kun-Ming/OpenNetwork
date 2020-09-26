@@ -41,7 +41,7 @@ classdef FeedforwardLayer < Layers.BaseLayer
             obj.syn_in_layer = cell(obj.total_neurons, 1);
         end
         
-        generate_synapse(obj, conn_strength, type, speed);
+        generate_synapse(obj, syn_param);
         simulation(obj, time_now);   
     end
 end
