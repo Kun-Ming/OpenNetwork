@@ -36,7 +36,8 @@ classdef FeedforwardLayer < Layers.BaseLayer
             [obj.neuron_in_layer.ID] = neuronID{:};
             
             % determin exc or inh
-            [obj.neuron_in_layer(:).ei_type] = deal(rand);
+            ei_type = num2cell(rand(N_neurons_in_dim));
+            [obj.neuron_in_layer(:).ei_type] = deal(ei_type{:});
             
             obj.syn_in_layer = cell(obj.total_neurons, 1);
         end

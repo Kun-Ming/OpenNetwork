@@ -8,11 +8,11 @@ classdef connectionLayer < handle
     end
     
     methods
-        function obj = connectionLayer(exc_out, inh_out, Nx, total_neurons, syn_type)
+        function obj = connectionLayer(exc_out, inh_out, Nx, syn_type)
             obj.exc_out = exc_out;
             obj.inh_out = inh_out;
             obj.Nx = Nx;
-            obj.syn_in_layer = cell(total_neurons, 1);
+            obj.syn_in_layer = cell(Nx, 1);
             obj.syn_type = syn_type;
         end
         
