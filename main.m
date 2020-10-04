@@ -48,17 +48,14 @@ ff_param.slow.conn_strength.inh = 0.4772;
 total_time = 20; % resulotion: .1ms, totally 200 time bin
 layer_size = [40,40];
 % FeedforwardLayer(N_neurons_in_dim, N_exc_neuron, N_inh_neuron, syn_type, simulationTime, ke, ki)
-% layer1 = Layers.FeedforwardLayer(layer_size, 1200, 400, .2, total_time, 3, 5);
-% layer2 = Layers.FeedforwardLayer(layer_size, 1200, 400, .2, total_time, 3, 5);
+layer1 = Layers.FeedforwardLayer(layer_size, 1200, 400, .2, total_time, 3, 5);
+layer2 = Layers.FeedforwardLayer(layer_size, 1200, 400, .2, total_time, 3, 5);
 % connectionLayer(exc_out, inh_out, Nx, syn_type)
-% layer1_2 = Layers.connectionLayer(26, 26, 80, 1);
+layer1_2 = Layers.connectionLayer(26, 26, 80, 1);
 
-% layer1.generate_synapse(syn_param);
-% layer2.generate_synapse(syn_param);
-% layer1_2.generate_synapse(layer1, layer2, ff_param);
-% assert(layer1_2.syn_in_layer{1,1}{1,1}.presyn_neuron == ...
-%         findobj(layer1.neuron_in_layer, 'ID',layer1_2.syn_in_layer{1,1}{1,1}.presyn_neuron.ID),...
-%         'NOT SAME OBJECT');
+layer1.generate_synapse(syn_param);
+layer2.generate_synapse(syn_param);
+layer1_2.generate_synapse(layer1, layer2, ff_param);
 
 spike_X = arrayfun(@(x) binornd(x+1, .8), [layer1.neuron_in_layer(:).spike_train]);
 spike_X = mat2cell(spike_X, total_time, ones(1, prod(layer_size)));
