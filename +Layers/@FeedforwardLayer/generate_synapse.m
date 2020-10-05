@@ -33,7 +33,7 @@ function  generate_synapse(obj, syn_param)
     syn_type = obj.syn_type;
     syn_in_layer = cell(total_neurons, 1);
     
-    parfor i = 1 : total_neurons   % generate synapse from ith neuron to other neurons
+    for i = 1 : total_neurons   % generate synapse from ith neuron to other neurons
         fprintf("feedforwardLayer generating synapse: presyn neuron ID = %d\n", i);
         if ei_type(i) < N_exc_neuron / total_neurons    % presynaptic neuron: exc neuron
             postsyn_IDs = get_projection_field(i, ke, size(neuron_in_layer));
@@ -45,7 +45,7 @@ function  generate_synapse(obj, syn_param)
                     continue
                 end
                 
-                postsyn_neuron = findobj(neuron_in_layer, 'ID', postsyn_IDs(j));
+                postsyn_neuron = neuron_in_layer(postsyn_IDs(j));
                 
                 judgement = rand;
                 
@@ -91,7 +91,7 @@ function  generate_synapse(obj, syn_param)
             post_syn_arr = cell(max(size(postsyn_IDs)), 1);
             
             for j = 1 : max(size(postsyn_IDs))
-                postsyn_neuron = findobj(neuron_in_layer, 'ID', postsyn_IDs(j));
+                postsyn_neuron = neuron_in_layer(postsyn_IDs(j));
                 
                 judgement = rand;
                 

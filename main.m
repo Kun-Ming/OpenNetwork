@@ -45,13 +45,16 @@ ff_param.slow.taur = 1;
 ff_param.slow.conn_strength.exc = 0.6261;
 ff_param.slow.conn_strength.inh = 0.4772;
 %%
-total_time = 20; % resulotion: .1ms, totally 200 time bin
-layer_size = [40,40];
+total_time = 100; % resulotion: .1ms, totally 200 time bin
+layer_size = [200,200];
 % FeedforwardLayer(N_neurons_in_dim, N_exc_neuron, N_inh_neuron, syn_type, simulationTime, ke, ki)
-layer1 = Layers.FeedforwardLayer(layer_size, 1200, 400, .2, total_time, 3, 5);
-layer2 = Layers.FeedforwardLayer(layer_size, 1200, 400, .2, total_time, 3, 5);
+fprintf('generating layer1...');
+layer1 = Layers.FeedforwardLayer(layer_size, 30000, 10000, .2, total_time, 18, 32);
+fprintf('\n\ngenerating layer2...');
+layer2 = Layers.FeedforwardLayer(layer_size, 30000, 10000, .2, total_time, 18, 32);
 % connectionLayer(exc_out, inh_out, Nx, syn_type)
-layer1_2 = Layers.connectionLayer(26, 26, 80, 1);
+fprintf('\n\ngenerating layer1_2...\n\n');
+layer1_2 = Layers.connectionLayer(45, 15, 2500, 1);
 
 layer1.generate_synapse(syn_param);
 layer2.generate_synapse(syn_param);
@@ -64,7 +67,7 @@ spike_X = mat2cell(spike_X, total_time, ones(1, prod(layer_size)));
 for time = 1 : 1 : total_time 
     fprintf('simulating: %3d / %4d\n', time, total_time);
     layer1.simulation(time);
-    layer1_2.simulation(time);
+    layer1_2.simulation(time, layer1, layer2);
     layer2.simulation(time);
 end
 

@@ -11,7 +11,7 @@ function generate_synapse(obj, layer1, layer2, syn_param)
     layer1_total_neurons = layer1.total_neurons;
     syn_in_layer = cell(1, Nx);
     
-    parfor j = 1 : Nx
+    for j = 1 : Nx
         fprintf("connectionLayer generating synapse: presyn neuron ID = %d\n", j);
 %         i = pre_syn_id(j);
         if layer1_ei_type(pre_syn_id(j)) < layer1_N_exc_neuron / layer1_total_neurons % pre syn neuron is exc

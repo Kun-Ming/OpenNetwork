@@ -17,6 +17,6 @@ classdef connectionLayer < handle
         end
         
         generate_synapse(obj, layer1, layer2, param);
-        simulation(obj, time_now);  
+        simulation(obj, time_now, pre_layer, post_layer);  
     end
 end

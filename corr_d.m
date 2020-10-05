@@ -53,7 +53,7 @@ switch dim
 end
 
 % compute spike counts using sliding window 
-Tw=200; % sliding window size 
+Tw=5; % sliding window size 
 Tburn=0; 
 time=0:1:T;
 
